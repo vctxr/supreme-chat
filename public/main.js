@@ -19,7 +19,7 @@ $(() => {
         'of the Dauntless', 'of the Southern Ice', 'of the Western Valley'
     ]
 
-    let username = 'user'
+    let username = null
     let entered = false
 
     // set container height for mobile display
@@ -67,8 +67,10 @@ $(() => {
     function goToChatRoom() {
         if (entered) { return }
 
-        username = $('#name').val()
-        if (username.length != 0) {
+        const inputValue = $('#name').val()
+
+        if (inputValue.length != 0) {
+            username = inputValue
             entered = true
             $('#name').val('')
             $('#name').blur()
@@ -133,6 +135,7 @@ $(() => {
     })
 
     socket.on('reconnect', () => {
+        if (username === null || username === undefined) { return }
         socket.emit('user-joined', username)
     })
 })
