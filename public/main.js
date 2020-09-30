@@ -14,6 +14,9 @@ $(() => {
 
     let username = 'user'
 
+    // set container height for mobile display
+    $('#main-container').height(window.innerHeight)
+
     // username entered
     $('#name').keypress(e => {
         const keycode = e.keyCode || e.which
@@ -30,7 +33,7 @@ $(() => {
         e.preventDefault() // prevents page reloading
         const message = $('#m').val()
         if (message.length == 0) { return }
-        
+
         console.log('Sending message 🚀')
         const userColor = getUsernameColor(username)
         
