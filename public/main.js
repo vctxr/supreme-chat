@@ -1,7 +1,7 @@
 $(() => {
     const socket = io({
         reconnection: true,             // whether to reconnect automatically
-        reconnectionAttempts: 5, // number of reconnection attempts before giving up
+        reconnectionAttempts: Infinity, // number of reconnection attempts before giving up
         reconnectionDelay: 1000,        // how long to initially wait before attempting a new reconnection
         reconnectionDelayMax: 5000,
     })
@@ -25,9 +25,6 @@ $(() => {
 
     // autofocus on input username
     $('#name').focus()
-
-    // checks socket connection every 29s
-    setInterval(checkSocketConnection, 2000)
 
     // username entered
     $('#name')
@@ -75,7 +72,7 @@ $(() => {
             socket.emit('user-joined', username)
         }
     }
-    
+
     // append user join or left message
     function appendJoinLeftMessage(joinLeftMessage, count) {
         const countMessage = 'there are ' + count + ' participants.'
@@ -112,19 +109,6 @@ $(() => {
 
     function scrollToBottom() {
         $("#messages").scrollTop($("#messages")[0].scrollHeight)    // scroll to the bottom   
-    }
-
-    // checks socket connection
-    function checkSocketConnection() {
-
-        if (socket.connected) {
-            console.log('Socket connected 🟢')
-            $('#messages').append($('<div>').append($('<li class="secondary-text">').text('Connected')))
-
-        } else {
-            console.log('Socket disconnected 🔴')
-            $('#messages').append($('<div>').append($('<li class="secondary-text">').text('Disconnected')))
-        }
     }
 
     socket.on('server-notify-user-joined', data => {
