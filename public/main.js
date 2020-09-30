@@ -70,7 +70,7 @@ $(() => {
         username = $('#name').val()
         if (username.length != 0) {
             entered = true
-            $('enter').val('')
+            $('#name').val('')
             $('#name').blur()
             $('#landing-page').fadeOut(400, () => $(this).remove())
             socket.emit('user-joined', username)
