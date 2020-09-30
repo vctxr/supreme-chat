@@ -127,11 +127,8 @@ $(() => {
             location.reload()
 
             // Automatically reconnects
-            socket.connect()
-            socket.emit('client-sent', {
-                message: message,
-                userColor: getUsernameColor(username)
-            })
+            // socket.connect()
+            // socket.emit('user-joined', username)
         }
     }
 
