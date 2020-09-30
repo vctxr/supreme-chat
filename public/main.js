@@ -72,7 +72,6 @@ $(() => {
             entered = true
             $('enter').val('')
             $('#landing-page').fadeOut(400, () => $(this).remove())
-            $('#m').focus()
             socket.emit('user-joined', username)
         }
     }
