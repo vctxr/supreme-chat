@@ -15,7 +15,7 @@ $(() => {
     let username = 'user'
 
     // set container height for mobile display
-    $('#main-container').height(window.innerHeight)
+    $('#main-container').height(window.innerHeight - 8)
 
     // username entered
     $('#name').keypress(e => {
