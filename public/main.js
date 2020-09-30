@@ -120,6 +120,7 @@ $(() => {
             console.log('Socket connected 🟢')
         } else {
             console.log('Socket disconnected 🔴')
+            $('#messages').append($('<div>').append($('<li class="secondary-text">').text('Disconnected')))
 
             // Automatically reconnects
             socket.connect()
