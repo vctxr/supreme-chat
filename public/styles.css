@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f1f3f8;
+}
+
+.container {
+    height: 100vh;
+    max-width: 500px;
+    margin: auto;
+    padding-top: .5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+#messages div .secondary-text {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 100;
+    color: rgb(84, 84, 84);
+    padding: .4rem;
+}
+
+.secondary-text {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 100;
+    color: rgb(84, 84, 84);
+    padding: .4rem;
+}
+
+form {
+    background: #c2c5d4;
+    padding: .5rem;
+    display: flex;
+}
+
+form input {
+    border: 0;
+    outline: 0;
+    border-radius: 3px;
+    padding: .5rem;
+    margin-right: .5rem;
+    flex-grow: 1;
+    background: #f1f3f8;
+    font-family: inherit;
+}
+
+form button {
+    background: #393b44;
+    color: #f1f3f8;
+    border-radius: 3px;
+    border: none;
+    padding: .6rem 2rem;
+    outline: 0;
+    font-weight: 500;
+    font-family: inherit;
+}
+
+form button:active {
+    background: #293b44;
+}
+
+#messages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-bottom: .4rem;
+    font-size: 1.2rem;
+    font-weight: 300;
+    overflow: auto;
+    overflow-x: hidden;
+    flex-grow: 1;
+}
+
+#messages li {
+    padding: 0 1.2rem .9rem;
+    word-wrap: break-word;
+}
+
+#messages div .user-sent {
+    font-weight: 400;
+    padding-bottom: 0;
+    text-align: right;
+}
+
+#messages div .user-receive {
+    font-weight: 400;
+    padding-bottom: 0;
+    text-align: left;
+}
+
+.message-received {
+    text-align: left;
+    font-size: 1rem;
+}
+
+.message-sent {
+    text-align: right;
+    font-size: 1rem;
+}
+
+.landing {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    text-align: center;
+    display: table;
+}
+
+.landing-container {
+    display: table-cell;
+    vertical-align: middle;
+    transform: translateY(-50px);
+}
+
+.landing-title {
+    color: white;
+    font-size: 2.4rem;
+    font-weight: 300;
+}
+
+#name {
+    border: 0;
+    border-bottom: 2px solid white;
+    outline: 0;
+    margin-top: 2rem;
+    background: none;
+    caret-color: white;
+    color: white;
+    padding-bottom: .9rem;
+    font-family: inherit;
+    font-size: 2rem;
+    font-weight: 300;
+    text-align: center;
+    width: 500px;
+}
+
+@media screen and (max-width: 600px) {
+    .landing-title {
+        font-size: 1.6rem;
+        padding: 0 1rem
+    }
+
+    #name {
+        font-size: 1.4rem;
+        width: 70vw;
+        min-width: 200px;
+    }
+}

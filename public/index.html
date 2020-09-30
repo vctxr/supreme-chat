@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supreme chat</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+<body>
+    <div id="landing-page" class="landing">
+        <div class="landing-container">
+            <p class="landing-title">What do they call you? 🧐</p>
+            <input id="name" autocomplete="off" autofocus />
+        </div>
+    </div>
+
+    <div class="container">
+        <ul id="messages">
+            <div>
+                <li class="secondary-text">Welcome to Supreme chat.</li>
+            </div>
+        </ul>
+        <form>
+            <input id="m" placeholder="Enter message..." autocomplete="off" autofocus/><button>Send</button>
+        </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
