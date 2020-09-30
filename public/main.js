@@ -13,20 +13,25 @@ $(() => {
     ]
 
     let username = 'user'
+    let entered = false
 
     // set container height for mobile display
     $('#main-container').height(window.innerHeight - 8)
 
+    // autofocus on input username
+    $('#name').focus()
+
     // username entered
-    $('#name').keypress(e => {
-        const keycode = e.keyCode || e.which
-        if (keycode == '13') {
-            username = $('#name').val()
-            $('#landing-page').fadeOut(400, () => $(this).remove())
-            $('#m').focus()
-            socket.emit('user-joined', username)
-        }
-    })
+    $('#name')
+        .keypress(e => {
+            const keycode = e.keyCode || e.which
+            if (keycode == '13') {
+                goToChatRoom()
+            }
+        })
+        .focusout(() => {
+            goToChatRoom()
+        })
 
     // form submitted
     $('form').submit(e => {
@@ -50,6 +55,18 @@ $(() => {
 
         return false
     })
+
+    function goToChatRoom() {
+        if (entered) { return }
+
+        username = $('#name').val()
+        if (username.length != 0) {
+            entered = true
+            $('#landing-page').fadeOut(400, () => $(this).remove())
+            $('#m').focus()
+            socket.emit('user-joined', username)
+        }
+    }
 
     // get color from username
     function getUsernameColor(username) {
