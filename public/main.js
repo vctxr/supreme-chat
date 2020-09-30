@@ -131,6 +131,11 @@ $(() => {
     })
 
     socket.on('reconnect', () => {
+        $('#m').prop('disabled', false)
         socket.emit('user-joined', username)
+    })
+
+    socket.on('reconnecting', () => {
+        $('#m').prop('disabled', true)
     })
 })
