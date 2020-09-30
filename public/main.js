@@ -43,11 +43,13 @@ $(() => {
     // form submitted
     $('form').submit(e => {
         e.preventDefault() // prevents page reloading
+        if (!socket.connection) { return }
+
         const message = $('#m').val()
         if (message.length == 0) { return }
 
         console.log('Sending message 🚀')
-        
+
         socket.emit('client-sent', {
             message: message,
             userColor: getUsernameColor(username)
@@ -131,19 +133,6 @@ $(() => {
     })
 
     socket.on('reconnect', () => {
-        $('#m').prop('disabled', false)
         socket.emit('user-joined', username)
-    })
-
-    socket.on('reconnecting', () => {
-        $('#m').prop('disabled', true)
-    })
-
-    socket.on('connect-timeout', () => {
-        $('#m').prop('disabled', true)
-    })
-
-    socket.on('connect-error', () => {
-        $('#m').prop('disabled', true)
     })
 })
