@@ -121,10 +121,10 @@ $(() => {
             location.reload()
         }
 
-        if (currentTime() - lastCheckedConnection > 5000) {
-            console.log('Reload');
-            location.reload()
-        }
+        // if (currentTime() - lastCheckedConnection > 5000) {
+        //     console.log('Reload');
+        //     location.reload()
+        // }
     }
 
     function currentTime() {
