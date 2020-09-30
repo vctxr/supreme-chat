@@ -75,6 +75,16 @@ $(() => {
             socket.emit('user-joined', username)
         }
     }
+    
+    // append user join or left message
+    function appendJoinLeftMessage(joinLeftMessage, count) {
+        const countMessage = 'there are ' + count + ' participants.'
+
+        $('#messages').append($('<div>').append($('<li class="secondary-text">').text(joinLeftMessage))) // append message to chat as user joined or left
+        $('#messages').append($('<div>').append($('<li class="secondary-text">').text(countMessage))) // append message to chat as participant count
+
+        scrollToBottom()
+    }
 
     // get color from username
     function getUsernameColor(username) {
@@ -104,16 +114,6 @@ $(() => {
         $("#messages").scrollTop($("#messages")[0].scrollHeight)    // scroll to the bottom   
     }
 
-    // append user join or left message
-    function appendJoinLeftMessage(joinLeftMessage, count) {
-        const countMessage = 'there are ' + count + ' participants.'
-
-        $('#messages').append($('<div>').append($('<li class="secondary-text">').text(joinLeftMessage))) // append message to chat as user joined or left
-        $('#messages').append($('<div>').append($('<li class="secondary-text">').text(countMessage))) // append message to chat as participant count
-
-        scrollToBottom()
-    }
-
     // checks socket connection
     function checkSocketConnection() {
 
@@ -124,11 +124,6 @@ $(() => {
         } else {
             console.log('Socket disconnected 🔴')
             $('#messages').append($('<div>').append($('<li class="secondary-text">').text('Disconnected')))
-            location.reload()
-
-            // Automatically reconnects
-            // socket.connect()
-            // socket.emit('user-joined', username)
         }
     }
 
@@ -147,5 +142,9 @@ $(() => {
         $('#messages').append($('<li class="message-received">').text(data.message)) // append message to chat as message-received
 
         scrollToBottom()
+    })
+
+    socket.on('reconnect', () => {
+        socket.emit('user-joined', username)
     })
 })
