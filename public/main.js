@@ -138,4 +138,12 @@ $(() => {
     socket.on('reconnecting', () => {
         $('#m').prop('disabled', true)
     })
+
+    socket.on('connect-timeout', () => {
+        $('#m').prop('disabled', true)
+    })
+
+    socket.on('connect-error', () => {
+        $('#m').prop('disabled', true)
+    })
 })
