@@ -116,6 +116,8 @@ $(() => {
 
     // checks socket connection
     function checkSocketConnection() {
+        $('#messages').append($('<div>').append($('<li class="secondary-text">').text('Checking connection')))
+
         if (socket.connected) {
             console.log('Socket connected 🟢')
         } else {
