@@ -1,5 +1,10 @@
 $(() => {
-    const socket = io()
+    const socket = io({
+        reconnection: true,             // whether to reconnect automatically
+        reconnectionAttempts: Infinity, // number of reconnection attempts before giving up
+        reconnectionDelay: 1000,        // how long to initially wait before attempting a new reconnection
+        reconnectionDelayMax: 5000,
+    })
 
     const COLORS = [
         '#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#2196F3', '#00BCD4',
@@ -14,7 +19,6 @@ $(() => {
 
     let username = 'user'
     let entered = false
-    let lastCheckedConnection = currentTime()
 
     // set container height for mobile display
     $('#main-container').height(window.innerHeight - 8)
@@ -118,17 +122,8 @@ $(() => {
             console.log('Socket connected 🟢')
         } else {
             console.log('Socket disconnected 🔴')
-            location.reload()
+            // location.reload()
         }
-
-        // if (currentTime() - lastCheckedConnection > 5000) {
-        //     console.log('Reload');
-        //     location.reload()
-        // }
-    }
-
-    function currentTime() {
-        return new Date().getTime()
     }
 
     socket.on('server-notify-user-joined', data => {
