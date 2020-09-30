@@ -1,12 +1,12 @@
 $(() => {
     const socket = io()
 
-    const colors = [
+    const COLORS = [
         '#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#2196F3', '#00BCD4',
         '#009688', '#4CAF50', '#FF9800', '#FF5722', '#795548', '#9E9E9E', '#607D8B'
     ]
 
-    const titles = [
+    const TITLES = [
         'of the Great Barlow', ', Marquess of Salisburry', ', Marquess of Brystol', 'The Wanderer',
         'of the Northern Mountains', 'of the Eastern Seas', 'The Denial', 'The Wise', 'The Abominable',
         'The Forgettable', 'The Chosen One'
@@ -55,8 +55,8 @@ $(() => {
             hash = username.charCodeAt(i) + (hash << 5) - hash;
         }
 
-        const index = Math.abs(hash % colors.length);
-        return colors[index];
+        const index = Math.abs(hash % COLORS.length);
+        return COLORS[index];
     }
 
     // get title from username
@@ -67,8 +67,8 @@ $(() => {
             hash = username.charCodeAt(i) + (hash << 5) - hash;
         }
 
-        const index = Math.abs(hash % titles.length);
-        return titles[index];
+        const index = Math.abs(hash % TITLES.length);
+        return TITLES[index];
     }
 
     function scrollToBottom() {
