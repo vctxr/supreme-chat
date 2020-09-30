@@ -28,9 +28,10 @@ $(() => {
     // form submitted
     $('form').submit(e => {
         e.preventDefault() // prevents page reloading
-        console.log('Sending message 🚀')
-
         const message = $('#m').val()
+        if (message.length == 0) { return }
+        
+        console.log('Sending message 🚀')
         const userColor = getUsernameColor(username)
         
         socket.emit('client-sent', {
