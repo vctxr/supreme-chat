@@ -14,6 +14,7 @@ $(() => {
 
     let username = 'user'
     let entered = false
+    let lastCheckedConnection = currentTime()
 
     // set container height for mobile display
     $('#main-container').height(window.innerHeight - 8)
@@ -22,14 +23,7 @@ $(() => {
     $('#name').focus()
 
     // checks socket connection every 29s
-    setInterval(() => {
-        if (socket.connected) {
-            console.log('Socket connected 🟢')
-        } else {
-            console.log('Socket disconnected 🔴')
-            location.reload()
-        }
-    }, 29000)
+    setInterval(checkSocketConnection, 2000)
 
     // username entered
     $('#name')
@@ -115,6 +109,26 @@ $(() => {
         $('#messages').append($('<div>').append($('<li class="secondary-text">').text(countMessage))) // append message to chat as participant count
 
         scrollToBottom()
+    }
+
+    // checks socket connection
+    function checkSocketConnection() {
+        lastCheckedConnection = currentTime()
+        if (socket.connected) {
+            console.log('Socket connected 🟢')
+        } else {
+            console.log('Socket disconnected 🔴')
+            location.reload()
+        }
+
+        if (currentTime() - lastCheckedConnection > 5000) {
+            console.log('Reload');
+            location.reload()
+        }
+    }
+
+    function currentTime() {
+        return new Date().getTime()
     }
 
     socket.on('server-notify-user-joined', data => {
