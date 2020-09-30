@@ -21,6 +21,16 @@ $(() => {
     // autofocus on input username
     $('#name').focus()
 
+    // checks socket connection every 29s
+    setInterval(() => {
+        if (socket.connected) {
+            console.log('Socket connected 🟢')
+        } else {
+            console.log('Socket disconnected 🔴')
+            location.reload()
+        }
+    }, 29000)
+
     // username entered
     $('#name')
         .keypress(e => {
@@ -62,6 +72,7 @@ $(() => {
         username = $('#name').val()
         if (username.length != 0) {
             entered = true
+            $('enter').val('')
             $('#landing-page').fadeOut(400, () => $(this).remove())
             $('#m').focus()
             socket.emit('user-joined', username)
@@ -70,26 +81,26 @@ $(() => {
 
     // get color from username
     function getUsernameColor(username) {
-        let hash = 7;
+        let hash = 7
         
         for (let i = 0; i < username.length; i++) {
-            hash = username.charCodeAt(i) + (hash << 5) - hash;
+            hash = username.charCodeAt(i) + (hash << 5) - hash
         }
 
-        const index = Math.abs(hash % COLORS.length);
-        return COLORS[index];
+        const index = Math.abs(hash % COLORS.length)
+        return COLORS[index]
     }
 
     // get title from username
     function getUsernameTitle(username) {
-        let hash = 7;
+        let hash = 7
         
         for (let i = 0; i < username.length; i++) {
-            hash = username.charCodeAt(i) + (hash << 5) - hash;
+            hash = username.charCodeAt(i) + (hash << 5) - hash
         }
 
-        const index = Math.abs(hash % TITLES.length);
-        return TITLES[index];
+        const index = Math.abs(hash % TITLES.length)
+        return TITLES[index]
     }
 
     function scrollToBottom() {
@@ -122,4 +133,4 @@ $(() => {
 
         scrollToBottom()
     })
-});
+})
