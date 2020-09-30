@@ -120,6 +120,8 @@ $(() => {
 
         if (socket.connected) {
             console.log('Socket connected 🟢')
+            $('#messages').append($('<div>').append($('<li class="secondary-text">').text('Connected')))
+
         } else {
             console.log('Socket disconnected 🔴')
             $('#messages').append($('<div>').append($('<li class="secondary-text">').text('Disconnected')))
