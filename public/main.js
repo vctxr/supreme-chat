@@ -43,7 +43,7 @@ $(() => {
     // form submitted
     $('form').submit(e => {
         e.preventDefault() // prevents page reloading
-        if (!socket.connection) { return }
+        if (!socket.connected) { return }
 
         const message = $('#m').val()
         if (message.length == 0) { return }
