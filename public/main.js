@@ -14,7 +14,9 @@ $(() => {
     const TITLES = [
         'of the Great Barlow', ', Marquess of Salisburry', ', Marquess of Brystol', 'The Wanderer',
         'of the Northern Mountains', 'of the Eastern Seas', 'The Denial', 'The Wise', 'The Abominable',
-        'The Forgettable', 'The Chosen One'
+        'The Forgettable', 'The Chosen One', ', Duke of Lynster', ', Duke of Ruxembourg', 'The Noble', 
+        'The Gatekeeper', 'The Enigmatic', 'The Superficial', 'The Defiant', 'of the Heavenly Sky',
+        'of the Dauntless', 'of the Southern Ice', 'of the Western Valley'
     ]
 
     let username = 'user'
