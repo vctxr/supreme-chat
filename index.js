@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
     res.sendFile('index.html')
 })
 
-io.on('connection', socket => {    
+io.on('connection', socket => {   
     socket.on('user-joined', username => {
         console.log('Server detected user joined: ' + username + ' 👋')
 

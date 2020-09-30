@@ -1,7 +1,7 @@
 $(() => {
     const socket = io({
         reconnection: true,             // whether to reconnect automatically
-        reconnectionAttempts: Infinity, // number of reconnection attempts before giving up
+        reconnectionAttempts: 5, // number of reconnection attempts before giving up
         reconnectionDelay: 1000,        // how long to initially wait before attempting a new reconnection
         reconnectionDelayMax: 5000,
     })
@@ -48,11 +48,10 @@ $(() => {
         if (message.length == 0) { return }
 
         console.log('Sending message 🚀')
-        const userColor = getUsernameColor(username)
         
         socket.emit('client-sent', {
             message: message,
-            userColor: userColor
+            userColor: getUsernameColor(username)
         })
 
         $('#m').val('')    // clears input field
@@ -117,12 +116,17 @@ $(() => {
 
     // checks socket connection
     function checkSocketConnection() {
-        lastCheckedConnection = currentTime()
         if (socket.connected) {
             console.log('Socket connected 🟢')
         } else {
             console.log('Socket disconnected 🔴')
-            // location.reload()
+
+            // Automatically reconnects
+            socket.connect()
+            socket.emit('client-sent', {
+                message: message,
+                userColor: getUsernameColor(username)
+            })
         }
     }
 
