@@ -38,6 +38,7 @@ form {
     background: #c2c5d4;
     padding: .5rem;
     display: flex;
+    min-height: 51.19px;
 }
 
 form input {
