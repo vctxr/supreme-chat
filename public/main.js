@@ -78,6 +78,8 @@ $(() => {
 
     // append user join or left message
     function appendJoinLeftMessage(joinLeftMessage, count) {
+        if (!joined) { return }
+
         const countMessage = 'there are ' + count + ' participants.'
 
         $('#messages').append($('<div>').append($('<li class="secondary-text">').text(joinLeftMessage))) // append message to chat as user joined or left
@@ -125,6 +127,8 @@ $(() => {
     })
 
     socket.on('server-sent', data => {
+        if (!joined) { return }
+        
         $('#messages').append($('<div>').append($('<li class="user-receive">').text(data.username).css('color', data.userColor))) // append username
         $('#messages').append($('<li class="message-received">').text(data.message)) // append message to chat as message-received
 
