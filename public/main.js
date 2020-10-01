@@ -139,7 +139,7 @@ $(() => {
 
     socket.on('reconnecting', () => {
         // if already reconnecting, do nothing.
-        if ($('#reconnecting').length) { return }
+        if ($('#m').is(':disabled')) { return }
 
         $('#m').prop({
             'placeholder': 'Reconnecting...',
