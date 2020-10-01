@@ -20,6 +20,7 @@ $(() => {
     ]
 
     let username = null
+    let joined = false
 
     // set container height for mobile display
     $('#main-container').height(window.innerHeight - 8)
@@ -67,7 +68,11 @@ $(() => {
             $('#name').val('')
             $('#name').blur()
             $('#landing-page').fadeOut(400, () => $(this).remove())
-            socket.emit('user-joined', username)
+
+            if (!joined) {
+                joined = true
+                socket.emit('user-joined', username)
+            }
         }
     }
 
@@ -127,24 +132,29 @@ $(() => {
     })
 
     socket.on('reconnect', () => {
-        if (username === null || username === undefined) { return }
-
+        console.log('reconnected');
         $('#m').prop({
             'placeholder': 'Enter message...',
             'disabled': false
-        })
+        }).css('z-index', 'auto')
 
-        socket.emit('user-joined', username)
+        if (username === null || username === undefined) { return }
+
+        if (!joined) {
+            joined = true
+            socket.emit('user-joined', username)
+        }
     })
 
     socket.on('reconnecting', () => {
+        console.log('reconnecting');
         // if already reconnecting, do nothing.
         if ($('#m').is(':disabled')) { return }
 
         $('#m').prop({
             'placeholder': 'Reconnecting...',
-            'disabled': true
-        })
+            'disabled': true,
+        }).css('z-index', '-1')
 
         scrollToBottom()
     })
