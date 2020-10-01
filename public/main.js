@@ -20,7 +20,6 @@ $(() => {
     ]
 
     let username = null
-    let entered = false
 
     // set container height for mobile display
     $('#main-container').height(window.innerHeight - 8)
@@ -29,16 +28,12 @@ $(() => {
     $('#name').focus()
 
     // username entered
-    $('#name')
-        .keypress(e => {
-            const keycode = e.keyCode || e.which
-            if (keycode == '13') {
-                goToChatRoom()
-            }
-        })
-        .focusout(() => {
+    $('#name').keypress(e => {
+        const keycode = e.keyCode || e.which
+        if (keycode == '13') {
             goToChatRoom()
-        })
+        }
+    })
 
     // form submitted
     $('form').submit(e => {
@@ -65,13 +60,10 @@ $(() => {
     })
 
     function goToChatRoom() {
-        if (entered) { return }
-
         const inputValue = $('#name').val()
 
         if (inputValue.length != 0) {
             username = inputValue
-            entered = true
             $('#name').val('')
             $('#name').blur()
             $('#landing-page').fadeOut(400, () => $(this).remove())
@@ -136,14 +128,24 @@ $(() => {
 
     socket.on('reconnect', () => {
         if (username === null || username === undefined) { return }
-        $('#reconnecting').remove()
+
+        $('#m').prop({
+            'placeholder': 'Enter message...',
+            'disabled': false
+        })
+
         socket.emit('user-joined', username)
     })
 
     socket.on('reconnecting', () => {
         // if already reconnecting, do nothing.
         if ($('#reconnecting').length) { return }
-        $('#messages').append($('<li id="reconnecting" class="secondary-text">').text('Reconnecting...')) // append message to chat as reconnecting
+
+        $('#m').prop({
+            'placeholder': 'Reconnecting...',
+            'disabled': true
+        })
+
         scrollToBottom()
     })
 })
