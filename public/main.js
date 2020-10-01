@@ -136,7 +136,7 @@ $(() => {
         $('#m').prop({
             'placeholder': 'Enter message...',
             'disabled': false
-        }).css('z-index', 'auto')
+        }).parent().css('z-index', 'auto')
 
         if (username === null || username === undefined) { return }
 
@@ -154,7 +154,7 @@ $(() => {
         $('#m').prop({
             'placeholder': 'Reconnecting...',
             'disabled': true,
-        }).css('z-index', 'auto')
+        }).parent().css('z-index', '-1')
 
         scrollToBottom()
     })
