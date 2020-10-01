@@ -136,6 +136,14 @@ $(() => {
 
     socket.on('reconnect', () => {
         if (username === null || username === undefined) { return }
+        $('#reconnecting').remove()
         socket.emit('user-joined', username)
+    })
+
+    socket.on('reconnecting', () => {
+        // if already reconnecting, do nothing.
+        if ($('#reconnecting').length) { return }
+        $('#messages').append($('<li id="reconnecting" class="secondary-text">').text('Reconnecting...')) // append message to chat as reconnecting
+        scrollToBottom()
     })
 })
