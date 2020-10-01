@@ -141,6 +141,7 @@ form button:active {
     font-weight: 300;
     text-align: center;
     width: 500px;
+    border-radius: 0;
 }
 
 @media screen and (max-width: 600px) {
