@@ -154,7 +154,7 @@ $(() => {
         $('#m').prop({
             'placeholder': 'Reconnecting...',
             'disabled': true,
-        }).css('z-index', '-1')
+        }).css('z-index', 'auto')
 
         scrollToBottom()
     })
