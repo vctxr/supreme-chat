@@ -132,7 +132,7 @@ $(() => {
     })
 
     socket.on('reconnect', () => {
-        console.log('reconnected');
+        console.log('Reconnected! 🟢');
         $('#m').prop({
             'placeholder': 'Enter message...',
             'disabled': false
@@ -147,7 +147,7 @@ $(() => {
     })
 
     socket.on('reconnecting', () => {
-        console.log('reconnecting');
+        console.log('Reconnecting... 🟠');
         // if already reconnecting, do nothing.
         if ($('#m').is(':disabled')) { return }
 
@@ -157,5 +157,10 @@ $(() => {
         }).parent().css('z-index', '-1')
 
         scrollToBottom()
+    })
+
+    socket.on('disconnect', () => {
+        console.log('Disconnected! 🔴');
+        joined = false
     })
 })
